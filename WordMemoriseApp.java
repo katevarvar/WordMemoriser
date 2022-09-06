@@ -1,6 +1,7 @@
 package PolishedTasksOneByOne.EqualsHashCodeAndToString.wordMemoriser;
 
 import java.util.Scanner;
+
 public class WordMemoriseApp {
     String content;
     int[] counter;
@@ -10,59 +11,68 @@ public class WordMemoriseApp {
     }
 
     public static Pairs[] writeNewPairs(String content) {
-        String[] pairs1 = content.split("/n");//делим строку на элементы массива построчно
+        String[] pairs1 = content.split(";");//делим строку на элементы массива построчно
         int size = pairs1.length;
+        //System.out.println(Arrays.toString(pairs1));
         Pairs[] filled = new Pairs[size];
         int i = 0;
-        for (Pairs n: filled) {
-            filled[i].wordTranslation = pairs1[i];
-            filled[i].numbers = i;
-            i++;
+        for (String n: pairs1) {
+           filled[i] = new Pairs(pairs1[i]);
+           i++;
         }
         return filled;
     }
 
+//    public static Pairs[] smash(Pairs[] filled) {
+//        List<Pairs> filled1 = Arrays.asList(filled);
+//        Collections.shuffle(filled1);
+//        filled1.toArray(filled);
+//        System.out.println(Arrays.toString(filled));
+//        return filled;
+//    }
+
     public static void training(String content) {
-        Pairs[] filled = writeNewPairs(content);
+        Pairs[] filled1 = writeNewPairs(content);
         Scanner sc = new Scanner(System.in);
         System.out.println("How many words do you want to repeat now?");
         int quantity =  Integer.parseInt(sc.nextLine());
-        System.out.println("");
         for (int i = 0; i < quantity; i++) {
-            int first = filled[i].wordTranslation.indexOf("-");
-            int end = filled[i].wordTranslation.indexOf("\n");
+            int first = filled1[i].wordTranslation.indexOf("-");
+            int end = filled1[i].wordTranslation.indexOf(";") + 1;
             if (i % 2 == 0) {
-                System.out.println(filled[i].wordTranslation.substring(0, first));
+                System.out.println("\n" + filled1[i].wordTranslation.substring(0, first));
             } else {
-                System.out.println(filled[i].wordTranslation.substring(first, end));
+                System.out.println("\n" + filled1[i].wordTranslation.substring(first + 2 , filled1[i].wordTranslation.length()));
             }
             Scanner userTranslation = new Scanner(System.in);
-            System.out.println("Your translation" + userTranslation.nextLine());
-            System.out.println("Check:" + filled[i].wordTranslation);
+            System.out.println("Your translation:  " + userTranslation.nextLine());
+            System.out.println("Check:" + filled1[i].wordTranslation);
         }
     }
 
     public static void main(String[] args) {
-        String content = "somehow - как_нибудь\n" +
-                "boring - скучный\n" +
-                "to_bother - беспокоить_отвлекать\n" +
-                "to_annoy - раздражать\n" +
-                "to_worry - переживать\n" +
-                "domestic_violence - домашнее_насилие\n" +
-                "yet - еще_(все_еще)\n" +
-                "despite - не_смотря_на\n" +
-                "consider - по_поводу_учитывать\n" +
-                "consequence - последовательность_следствие_псследствие\n" +
-                "survey - опрос_исследование\n" +
-                "attitude - отношение_поведение\n" +
-                "indifference - безразличие\n" +
-                "justifable - оправдываемый_законный_позволительный\n" +
-                "to_be_used_to - быть_привыкшим_к_чему_либо\n" +
-                "to_get_used_to - привыкнуть_к_чему-либо\n" +
-                "to_disclose - раскрыть_разоблачить\n" +
-                "to_offence - оскорблять\n" +
-                "however - однако_как_бы_то_ни_было\n" +
-                "fair - честный\n";
+        String content = """
+                somehow - как нибудь;
+                boring - скучный;
+                to bother - беспокоить отвлекать;
+                to annoy - раздражать;
+                to_worry - переживать;
+                domestic violence - домашнее_насилие;
+                yet - еще (все еще);
+                despite - не смотря на;
+                consider - по поводу учитывать;
+                consequence - последовательность следствие псследствие;
+                survey - опрос исследование;
+                attitude - отношение поведение;
+                indifference - безразличие;
+                justifable - оправдываемый, законный, позволительный;
+                to be used to - быть привыкшим к чему_либо;
+                to get used to - привыкнуть к чему_либо;
+                to disclose - раскрыть разоблачить;
+                to offence - оскорблять;
+                however - однако, как бы то ни было;
+                fair - честный; """
+                ;
         WordMemoriseApp.training(content);
     }
 }
