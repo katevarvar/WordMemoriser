@@ -1,5 +1,8 @@
 package PolishedTasksOneByOne.EqualsHashCodeAndToString.wordMemoriser;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class WordMemoriseApp {
@@ -23,16 +26,17 @@ public class WordMemoriseApp {
         return filled;
     }
 
-//    public static Pairs[] smash(Pairs[] filled) {
-//        List<Pairs> filled1 = Arrays.asList(filled);
-//        Collections.shuffle(filled1);
-//        filled1.toArray(filled);
-//        System.out.println(Arrays.toString(filled));
-//        return filled;
-//    }
+    public static Pairs[] smash(Pairs[] filled) {
+        List<Pairs> filled1 = Arrays.asList(filled);
+        Collections.shuffle(filled1);
+        filled1.toArray(filled);
+        System.out.println(Arrays.toString(filled));
+        return filled;
+    }
 
     public static void training(String content) {
         Pairs[] filled1 = writeNewPairs(content);
+        filled1 = smash(filled1);
         Scanner sc = new Scanner(System.in);
         System.out.println("How many words do you want to repeat now?");
         int quantity =  Integer.parseInt(sc.nextLine());
