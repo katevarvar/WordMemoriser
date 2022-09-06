@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 public class WordMemoriseApp {
     String content;
-    int[] counter;
 
     public void setContent(String content) {
         this.content = content; //конструктор
@@ -69,7 +68,7 @@ public class WordMemoriseApp {
                 survey - опрос исследование;
                 attitude - отношение поведение;
                 indifference - безразличие;
-                justifable - оправдываемый, законный, позволительный;
+                justifiable - оправдываемый, законный, позволительный;
                 to be used to - быть привыкшим к чему_либо;
                 to get used to - привыкнуть к чему_либо;
                 to disclose - раскрыть разоблачить;
