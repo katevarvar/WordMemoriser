@@ -1,22 +1,27 @@
 package PolishedTasksOneByOne.EqualsHashCodeAndToString.wordMemoriser;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 public class WordMemoriseApp {
-
-    public static void training(String content) {
+    public static void training() throws IOException {
+        Path textWithNewVocabulary
+                = Path.of("src/PolishedTasksOneByOne/EqualsHashCodeAndToString/wordMemoriser/Text");
+        // Now calling Files.readString() method to
+        // read the file
+        String content = Files.readString(textWithNewVocabulary);
         PairWordTranslation[] filled1 = PairWordTranslation.writeNewPairs(content);
         filled1 = Mixer.smash(filled1);
         Scanner sc = new Scanner(System.in);
         System.out.println("How many words do you want to repeat now?");
         int quantity =  Integer.parseInt(sc.nextLine());
         for (int i = 0; i < quantity; i++) {
-            int first = filled1[i].wordTranslation.indexOf("-");
-            int end = filled1[i].wordTranslation.indexOf(";") + 1;
             if (i % 2 == 0) {
-                System.out.println("\n" + filled1[i].wordTranslation.substring(0, first));
+                System.out.println("\n" + filled1[i].word);
             } else {
-                System.out.println("\n" + filled1[i].wordTranslation.substring(first + 2 , filled1[i].wordTranslation.length()));
+                System.out.println("\n" + filled1[i].translation);
             }
             Scanner userTranslation = new Scanner(System.in);
             System.out.println("Your translation:  " + userTranslation.nextLine());
@@ -24,32 +29,11 @@ public class WordMemoriseApp {
         }
     }
 
-    public static void main(String[] args) {
-        String content = """
-                somehow - как нибудь;
-                boring - скучный;
-                to bother - беспокоить отвлекать;
-                to annoy - раздражать;
-                to_worry - переживать;
-                domestic violence - домашнее_насилие;
-                yet - еще (все еще);
-                despite - не смотря на;
-                consider - по поводу учитывать;
-                consequence - последовательность следствие псследствие;
-                survey - опрос исследование;
-                attitude - отношение поведение;
-                indifference - безразличие;
-                justifiable - оправдываемый, законный, позволительный;
-                to be used to - быть привыкшим к чему_либо;
-                to get used to - привыкнуть к чему_либо;
-                to disclose - раскрыть разоблачить;
-                to offence - оскорблять;
-                however - однако, как бы то ни было;
-                fair - честный; """
-                ;
-        WordMemoriseApp.training(content);
+    public static void main(String[] args) throws IOException {
+        WordMemoriseApp.training();
     }
 }
+
 
 
 
